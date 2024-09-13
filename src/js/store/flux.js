@@ -1,9 +1,11 @@
+import { HotUpdateChunk } from "webpack";
+import FormularioNuevoContacto from '../views/formulario.js';
+
+
 const getState = ({ getStore, getActions, setStore }) => {
 	return {
 		store: {
-			contactList:[
-
-			],
+			contactList:[ ],
 
 			demo: [
 				{
@@ -32,7 +34,43 @@ const getState = ({ getStore, getActions, setStore }) => {
 				setStore({contactList: data.contacts})
 			},
 
+			FormularioNuevoContacto : async (contact) => {
+				const response = await fetch ("https://playground.4geeks.com/contact/agendas/agendamafer/contacts",{
+					method: "POST",
+					body: JSON.stringify(contact),
+					headers: {
+						"Content-Type": "application/json"
+					}
+				})
+				const data = await response.json();
+				getActions().loadContacts();
+			},
 
+			updateContact: async (updatedContact,id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/mafergonzalez/contacts/${id}`, {
+						method: "PUT",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify(updatedContact)
+					});
+
+					if (response.ok) getActions().fetchContactos();
+				} catch (error) {
+					console.error(error);
+				}
+			},
+
+			deleteContact: async (id) => {
+				try {
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/agendamafer/contacts/${id}`, {
+						method: 'DELETE',
+					})
+					getActions().loadContacts()
+					} catch (error) {
+					console.log(error)
+					alert("Error deleting contact")
+				}
+			}, 
 
 			loadSomeData: () => {
 				/**

@@ -1,27 +1,29 @@
 import React from "react";
-import rigoImage from "../../img/rigo-baby.jpg";
 import "../../styles/home.css";
-import ContactCard from "../component/contactCars"
-import { container } from "webpack";
 import { Context } from "../store/appContext";
 import { useContext } from "react";
+import Contact from "./cardContact";
 
 export const Home = () => {
-	const {store} = useContext(Context);
-	return (
-	<div className="text-center mt-5">
+	const { store } = useContext(Context);
 
-		{store.contactList.map ((item,index) => {
-			return (
-				<ContactCard 
-					key={index}
-					fullName={item.name}
-					address={item.address}
-					phone={item.phone}
-					email={item.email}
-				/> 
-			)
-		})}
+	return (
+		<div className="container mt-5">
+			{store.contactList.map((item, index) => {
+				return (
+					<div className="row mb-4" key={index}>
+						<div className="col">
+							<Contact
+								fullName={item.name}
+								address={item.address}
+								phone={item.phone}
+								email={item.email}
+								id={item.id}
+							/>
+						</div>
+					</div>
+				);
+			})}
 		</div>
-	
-)};
+	);
+};
