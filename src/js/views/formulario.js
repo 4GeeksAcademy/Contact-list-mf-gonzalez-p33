@@ -1,5 +1,6 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, } from "react";
 import { Context } from "../store/appContext";
+import { useNavigate } from "react-router-dom";
 
 const FormularioNuevoContacto = () => {
     const { store,actions } = useContext(Context);
@@ -11,11 +12,13 @@ const FormularioNuevoContacto = () => {
         address: "",
     });
 
+    const navigate = useNavigate();
 
-const handleSubmit = (event) => {
-    event.preventDefault();
-    actions.FormularioNuevoContacto(contact)
-}
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        actions.FormularioNuevoContacto(contact)
+        navigate("/");
+    };
 
 
 
@@ -58,8 +61,9 @@ const handleSubmit = (event) => {
                                 } />
                         </div>
                         
-                        <button type="submit" className=" col-12 btn btn-primary mb-5">
+                        <button type="submit" className=" col-12 btn btn-primary mb-5" >
                             Save Contact
+
                         </button>
                         
                     </form>

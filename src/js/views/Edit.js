@@ -4,7 +4,7 @@ import { Context } from "../store/appContext";
 
 const EditContact = () => {
     const { store, actions } = useContext(Context);
-    const navigate = useNavigate();
+    
     let { id } = useParams();
     const [newContact, setNewContact] = useState({
         name: "",
@@ -12,6 +12,8 @@ const EditContact = () => {
         phone: "",
         email: "",
     });
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setNewContact({
@@ -23,7 +25,7 @@ const EditContact = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         actions.updateContact(newContact,id); 
-        //navigate("/");//
+        navigate("/");
     };
 
     return (

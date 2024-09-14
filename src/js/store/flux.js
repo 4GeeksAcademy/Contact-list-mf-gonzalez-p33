@@ -48,7 +48,8 @@ const getState = ({ getStore, getActions, setStore }) => {
 
 			updateContact: async (updatedContact,id) => {
 				try {
-					const response = await fetch(`https://playground.4geeks.com/contact/agendas/mafergonzalez/contacts/${id}`, {
+					console.log(id,updatedContact)
+					const response = await fetch(`https://playground.4geeks.com/contact/agendas/agendamafer/contacts/${id}`, {
 						method: "PUT",
 						headers: { "Content-Type": "application/json" },
 						body: JSON.stringify(updatedContact)
@@ -58,6 +59,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 				} catch (error) {
 					console.error(error);
 				}
+
 			},
 
 			deleteContact: async (id) => {
